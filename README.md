@@ -280,7 +280,7 @@ repositories geen testen bevatten.
 Je kan deze bestanden compileren aan de hand van het volgende commando:
 
 ```bash
-$ gcc -g -std=gnu99 -Wall -Wno-unused-function -Werror main.c test.c graph.c -o test
+$ gcc -g -std=gnu99 -Wall -Wno-unused-function -Werror main.c student_test.c ta_test.c graph.c -o test
 ```
 
 De code die jullie schrijven moet compatibel zijn met de ISO/IEC 9899:1999 C
@@ -467,7 +467,7 @@ veranderd is over verschillende versies heen. Je zal hier ook op beoordeeld
 worden.
 
 ```bash
-$ git add graph.c test.c
+$ git add graph.c student_test.c
 $ git commit -m "Korte beschrijving van je wijzigingen"
 $ git push
 ```
@@ -483,7 +483,7 @@ jullie *gdb* of *ddd* kunnen gebruiken om je implementatie te debuggen.
 #### Testen
 
 Het is belangrijk om **je functies in detail te testen tijdens de
-implementatie**. De meegeleverde testen in [test.c](test.c) zijn niet volledig. 
+implementatie**. De meegeleverde testen in [student_test.c](student_test.c) zijn niet volledig. 
 Schrijf daarom ook je eigen testen en let daarbij zeker ook op randgevallen zoals 
 het eerste of het laatste element verwijderen uit een gelinkte lijst.
 Wacht ook niet tot het einde om je functies te beginnen testen maar start
@@ -510,7 +510,8 @@ ingeleverd worden. Alle wijzigingen aan jullie repository na deze datum zullen
 niet meer aanvaard worden.
 
 De repository moet de bestanden [graph.h](graph.h), [graph.c](graph.c),
-[test.c](test.c) en [main.c](main.c) bevatten. Denk eraan dat jullie de
+[student_test.c](student_test.c) en [main.c](main.c) bevatten. Denk eraan dat
+jullie de
 bestanden [graph.h](graph.h), en [main.c](main.c) niet mogen aanpassen! Je
 oplossing zal gecontroleerd worden via het uitvoeren van een aantal
 automatische testen. Zorg er daarom voor dat je oplossing werkt in de PC
