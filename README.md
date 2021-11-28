@@ -226,7 +226,7 @@ toegestaan om eigen bestanden toe te voegen.
 De repository kan je klonen met het commando:
 
 ```bash
-git clone https://www.github.com/informatica-werktuigen/project-c-graphs-<username>.git
+$ git clone git@github.com:informaticawerktuigen2021-2022/project-c-graphs-<username>.git
 ```
 
 waarin jullie ```<username>``` moeten vervangen door jullie GitHub gebruikersnaam.
@@ -280,7 +280,7 @@ repositories geen testen bevatten.
 Je kan deze bestanden compileren aan de hand van het volgende commando:
 
 ```bash
-gcc -g -std=gnu99 -Wall -Wno-unused-function -Werror main.c test.c graph.c -o test
+$ gcc -g -std=gnu99 -Wall -Wno-unused-function -Werror main.c test.c graph.c -o test
 ```
 
 De code die jullie schrijven moet compatibel zijn met de ISO/IEC 9899:1999 C
@@ -295,7 +295,7 @@ Wanneer het programma met succes gecompileerd is, kan je het uitvoeren door de
 volgende regel in te voeren:
 
 ```bash
-./test
+$ ./test
 ```
 
 Om te vermijden dat je de bovenstaande commando' s elke keer weer opnieuw moet
@@ -523,7 +523,8 @@ te klonen in een tijdelijke folder door onderstaande commando 's uit te voeren:
 
 ```bash
 $ cd /tmp
-$ git clone https://www.github.com/informatica-werktuigen/project-c-graphs-<username>.git
+$ git clone git@github.com:informaticawerktuigen2021-2022/project-c-graphs-<username>.git
+
 ```
 
 Indien alles correct is ingediend, zou de folder `/tmp/project-c-graphs-<username>` dan
