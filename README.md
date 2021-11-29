@@ -1,9 +1,9 @@
 # C Practicum - Grafen
 
 Het doel van dit practicum is om wat dieper in te gaan op een aantal belangrijke
-concepten uit de C programmeertaal (zoals *pointers* en *dynamisch
-geheugenbeheer*) die tijdens het hoorcollege en de oefenzittingen van C ook
-aan bod zullen komen.  Een goede manier om hiermee wat beter vertrouwd te
+concepten uit de C programmeertaal die ook tijdens het hoorcollege en de
+oefenzittingen aan bod zullen komen.  Een goede manier om hiermee 
+wat beter vertrouwd te
 worden is om een API te implementeren voor een gegevensstructuur. In dit
 practicum zullen jullie daarom een aantal operaties op
 [grafen](https://nl.wikipedia.org/wiki/Grafentheorie) moeten implementeren
@@ -52,7 +52,7 @@ Toledo. Alle antwoorden van assistenten op het
 discussieforum worden beschouwd als **deel van de opgave** en kunnen bijgevolg
 aanvullingen of correcties bevatten. Zorg ervoor dat je deze posts leest!
 
-Tip: open het forum en klik bovenaan op *subscribe* om een e-mail te krijgen
+Tip: Open het forum en klik bovenaan op *subscribe* om een e-mail te krijgen
 wanneer nieuwe threads worden toegevoegd aan het forum.
 
 ## 2. Opdracht
@@ -101,11 +101,10 @@ Om eerder toegekend geheugen terug vrij te geven, voorziet C de functie `void
 free(void *ptr)`
 ([man free](https://linux.die.net/man/3/free))
 die een pointer naar met `malloc` toegekend geheugen verwacht
-en het geheugen terug ter beschikking stelt voor andere doeleinden. Om te
-vermijden dat kostbaar geheugen verloren gaat
-([geheugenlek](https://nl.wikipedia.org/wiki/Geheugenlek)), is het belangrijk
-om ongebruikt maar toegekend geheugen terug vrij te geven, zoals reeds eerder
-aangehaald.
+en het geheugen terug ter beschikking stelt voor andere doeleinden.
+Zoals reeds eerder aangehaald, is het belangrijk om ongebruikt maar toegekend
+geheugen terug vrij te geven om te vermijden dat kostbaar geheugen onbeschikbaar
+wordt ([geheugenlek](https://nl.wikipedia.org/wiki/Geheugenlek)).
 
 Dynamisch geheugenbeheer zal pas tijdens de 
 [tweede oefenzitting](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les5-scopes-and-lifetimes) behandeld worden. Voor
@@ -135,8 +134,8 @@ Een manier om in C een gelinkte lijst voor te stellen is door gebruik te maken
 van twee *structs*, namelijk`struct list` en`struct element`. De eerste
 *struct* wordt dan gebruikt als het type dat de volledige lijst voorstelt
 terwijl de tweede *struct* gebruikt wordt als het type van een element in de
-lijst. Elk element bevat een "payload", in dit geval het geheel getal `value`
-en een *pointer* naar het volgende element.
+lijst. Elk element bevat een "payload" (in het voorbeeld hieronder het geheel
+getal `value`) en een *pointer* naar het volgende element in de lijst.
 
 ```c
 struct list
@@ -169,7 +168,7 @@ behandeld worden.
 Een graaf (Engels: graph) is een wiskundig object dat is samengesteld uit knopen
 (Engels: vertex) waarvan sommige paarsgewijs met elkaar verbonden zijn door
 bogen (Engels: edge). Een gerichte graaf is een graaf waarbij de bogen een
-richting hebben; De node waarin de boog vertrekt noemen we dan de staart
+richting hebben. De node waarin de boog vertrekt noemen we dan de staart
 (Engels: tail) van de boog en de node waarin de boog toekomt het hoofd
 (Engels: head). Een gewogen graaf is een graaf waarbij aan de bogen gewichten
 worden toegekend in de vorm van getallen.  Wanneer we een graaf grafisch
@@ -194,7 +193,7 @@ informatica waarbij dankbaar gebruik gemaakt wordt van grafentheorie.
 
 ### 2.2. Opgave
 
-Tijdens dit practicum zullen jullie een API voor gerichte grafen moeten
+Tijdens dit practicum zullen jullie een API voor gerichte gewogen grafen moeten
 implementeren. Hierbij komen de volgende zaken aan bod:
 
 - begrijpen hoe een functie werkt aan de hand van zijn
@@ -211,7 +210,7 @@ Om dit tot een goed einde te brengen, zullen jullie gebruik moeten maken
 van een gegevensstructuur die gebaseerd is op een enkelvoudig gelinkte lijst
 waarvoor jullie ook een aantal operaties zullen moeten implementeren.
 
-Hierna zullen we wat dieper ingaan op het gebruik van jullie 
+Nu zullen we wat dieper ingaan op het gebruik van jullie 
 persoonlijke Git repository, hoe jullie de code kunnen compileren en uitvoeren, de
 manier waarop we grafen in een computerprogramma zullen voorstellen en de API
 die jullie gaan implementeren.
@@ -219,7 +218,7 @@ die jullie gaan implementeren.
 #### Git repository
 
 Via GitHub Classroom hebben hebben jullie toegang tot een eigen private Git
-repository die alle nodige bestanden bevat om aan je practicum te beginnen. De
+repository die de nodige bestanden bevat om aan je practicum te beginnen. De
 meegeleverde bestanden mogen niet verwijderd worden. Het is uiteraard wel
 toegestaan om eigen bestanden toe te voegen.
 
@@ -235,7 +234,7 @@ De repository bevat volgende bestanden:
 
 - [graph.h](graph.h)
 Het header bestand met de declaraties van de functies die jullie van een
-implementatie moeten voorzien. Hierin vinden jullie ook de definitie van een
+implementatie moeten voorzien. Hierin vinden jullie ook de definities van een
 aantal gegevensstructuren die jullie moeten gebruiken bij deze implementatie.
 **Aan dit bestand mag niets veranderd worden.**
 
@@ -250,10 +249,11 @@ hoe de API te gebruiken die door het bestand [graph.h](graph.h)
 gedefinieerd wordt. **Aan dit bestand mag eveneens niet veranderd worden.**
 
 - [graph.c](graph.c)
-Bevat lege definities van de functies die in [graph.h](graph.h) gedeclareerd
+Bevat (lege) definities van de functies die in [graph.h](graph.h) gedeclareerd
 worden en die jullie van een implementatie moeten voorzien. De implementatie
 van een aantal (hulp)functies die jullie van ons krijgen is hier eveneens terug te
-vinden. Boven het prototype van elke functie staat in commentaar heel precies
+vinden. Boven de declaratie van elke functie in [graph.h](graph.h) staat in
+commentaar heel precies
 uitgelegd wat er van de functies verwacht wordt. Baseer je op deze commentaar
 bij het implementeren van de functies. Je mag hier eventueel hulpfuncties aan
 toevoegen, maar het functieprototype van bestaande functies mag niet veranderd
@@ -264,8 +264,9 @@ mogen dus niet aangepast worden.
 Bevat de functie *student_test* die een aantal eenvoudige testen uitvoert. Merk
 op dat deze testen zeer beperkt zijn. Het kan zelfs zijn
 dat als de meegeleverde testen lukken voor jullie implementatie er toch
-nog altijd een fout in jullie code zit. We
-raden jullie dan ook sterk aan om eigen testen toe te voegen terwijl jullie aan
+nog altijd fouten in jullie code zitten. We
+raden jullie dan ook sterk aan om eigen testen toe te voegen **terwijl** jullie
+aan
 de implementatie van een functie werken, niet alleen omdat jullie hierop
 beoordeeld worden maar ook omdat dit jullie zal helpen om sneller fouten te
 vinden. Probeer de code van de meegeleverde testen te begrijpen omdat jullie
@@ -308,7 +309,7 @@ moet oproepen, eenvoudigweg `make run` kan typen. Het programma *make*
 zal er dan voor zorgen dat
 
 - alleen de gewijzigde bestanden opnieuw gecompileerd worden,
-- alles correct samengevoegd wordt in een uitvoerbaar programma
+- alles correct samengevoegd ("gelinkt") wordt in een uitvoerbaar programma
 - het programma wordt uitgevoerd.
 
 #### Voorstelling van een graaf in een computerprogramma
@@ -337,8 +338,8 @@ aantal knopen in de graaf dat, zoals eerder vermeld, bij het aanmaken van de
 graaf wordt vastgelegd. Namen voor knopen zijn niet relevant voor onze
 representatie en we zullen dus verwijzen naar knopen aan de hand van hun
 uniek nummer. De gegevensstructuur die we voor een graaf gebruiken,
-`struct graph_s`, bevat een array van buurlijsten van het type
-`struct adjacency_list_s` die geïndexeerd wordt aan de hand van het
+`struct graph_s`, bevat een array van buurlijsten (van het type
+`struct adjacency_list_s`) die geïndexeerd wordt aan de hand van het
 knoopnummer. Een buurlijst dient geïmplementeerd te worden als een enkelvoudig 
 gelinkte lijst. Een buurlijst tenslotte bestaat uit bogen die worden
 voorgesteld door het type `struct edge_s`.
@@ -474,9 +475,9 @@ $ git push
 
 #### Debugger
 
-Een debugger is eveneens een belangrijk werktuig waarmee je een programma in
-uitvoering kan pauzeren om de toestand ervan te analyseren. Het kan je helpen 
-om problemen met je
+Een debugger is eveneens een belangrijk werktuig. Een debugger laat je namelijk
+toe een programma in uitvoering te pauzeren om de toestand waarin het zich dan
+bevindt te analyseren.  Het kan je helpen om problemen met je
 implementatie makkelijker te identificeren. Daarom verwachten we ook dat
 jullie *gdb* of *ddd* kunnen gebruiken om je implementatie te debuggen.
 
@@ -491,9 +492,11 @@ zeker met het schrijven en uitvoeren van test code voor een functie van zodra
 je die functie geïmplementeerd hebt. Via deze werkwijze zal je sneller tot een
 werkend resultaat komen met minder fouten.
 
+#### Invarianten, precondities en postcondities
+
 Het header bestand *assert.h* maakt de `assert` macro beschikbaar. Deze macro
 is zeer nuttig om te garanderen dat de precondities van de functies gerespecteerd
-worden, en om tijdens het maken van jullie project ervoor te zorgen dat
+worden, en om tijdens het maken van jullie project ervoor te zorgen dat de
 invarianten gelden.
 
 ## 4. Oefensessies
@@ -510,14 +513,17 @@ ingeleverd worden. Alle wijzigingen aan jullie repository na deze datum zullen
 niet meer aanvaard worden.
 
 De repository moet de bestanden [graph.h](graph.h), [graph.c](graph.c),
-[student_test.c](student_test.c) en [main.c](main.c) bevatten. Denk eraan dat
+[student_test.c](student_test.c), [ta_test.c](ta_test.c) en [main.c](main.c)
+bevatten. Denk eraan dat
 jullie de
-bestanden [graph.h](graph.h), en [main.c](main.c) niet mogen aanpassen! Je
+bestanden [graph.h](graph.h), [test.h](test.h) en [main.c](main.c) niet mogen
+aanpassen! Je
 oplossing zal gecontroleerd worden via het uitvoeren van een aantal
 automatische testen. Zorg er daarom voor dat je oplossing werkt in de PC
-klassen van gebouw 200A. Je mag tijdens het oplossen van je practicum
-uiteraard een andere compiler gebruiken maar wat je indient *moet* werken met
-*GCC*. Zo niet, wordt het niet bekeken.
+klassen van gebouw 200A. Je mag tijdens het werken aan je practicum
+uiteraard een andere omgeving gebruiken maar wat je indient *moet* compileren
+met *GCC* op de computers van de PC klassen. Zo niet, wordt het niet verder
+bekeken.
 
 Je kan een correcte inzending *controleren* door je eigen repository opnieuw
 te klonen in een tijdelijke folder door onderstaande commando 's uit te voeren:
