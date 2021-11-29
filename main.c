@@ -51,7 +51,7 @@ int main(void)
      */
     graph_to_dot(&graph, "test.dot");
 
-    /* 2.6 Disconnect vertex 2 from vertex 3 */
+    /* 2.6 Disconnect vertex 2 (tail) from vertex 3 (head) */
     graph_disconnect(&graph, 2, 3);
 
     /* 2.7 Print indegree and outdegree of vertex 1 */
@@ -59,6 +59,11 @@ int main(void)
     printf("Vertex 1 has an outdegree of %d\n", graph_outdegree(&graph, 1));
 
     /* 2.8 Release the memory that was allocated to the graph */
+    graph_release(&graph);
+
+    /* 2.9 Load a graph from a file */
+    graph_build_from_file(&graph, "graph1.txt");
+    graph_print(&graph);
     graph_release(&graph);
   }
   else

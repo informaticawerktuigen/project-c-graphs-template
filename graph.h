@@ -25,7 +25,9 @@ typedef struct graph_s
   unsigned vertex_count; /* Number of vertices in this graph. */
   unsigned edge_count;   /* Number of edges in this graph. */
 
-  /* An array of adjacency lists, indexed by vertex number */
+  /* Pointer to the first element of an array of adjacency lists. The array
+   * is indexed by vertex number
+   */
   adjacency_list_t *adjacency_lists;
 } graph_t;
 
@@ -110,8 +112,6 @@ bool list_contains(const adjacency_list_t *list, unsigned head, unsigned tail);
  *
  * Returns false when the dynamic allocation fails. Returns true otherwise.
  *
- * Don't forget to initialise each adjacency list !
- *
  * PRECONDITIONS: 
  *  - graph != NULL
  *
@@ -119,6 +119,8 @@ bool list_contains(const adjacency_list_t *list, unsigned head, unsigned tail);
  *  - when the dynamic memory allocation succeeds
  *    - valid memory has been allocated for all the adjacency_lists
  *    - all the member variables are correctly initialised
+ *
+ * NOTE: Don't forget to initialise each adjacency list !
  */ 
 bool graph_initialise(graph_t *graph, unsigned vertex_count);
 
@@ -185,7 +187,7 @@ void graph_release(graph_t *graph);
  * parameter 'head', 2) tail points to head, and 3) the edge is weighted
  * with the given weight.
  *
- * The new edge must be put in front of the correct adjacency list.
+ * The new edge must be put *in front* of the correct adjacency list.
  *
  * Returns false when the dynamic memory allocation fails or when the vertices
  * do not exist in the graph. Returns true otherwise.
@@ -198,7 +200,7 @@ void graph_release(graph_t *graph);
  *
  * POSTCONDITIONS:
  *  - when the dynamic memory allocation succeeds
- *    edge_count reflects the total number of edges in the given graph
+ *    edge_count reflects the new total number of edges in the given graph
  */
 bool
 graph_connect(graph_t *graph, unsigned tail, unsigned head, unsigned weight);
@@ -220,8 +222,8 @@ void graph_disconnect(graph_t *graph, unsigned tail, unsigned head);
 /* graph_indegree()
  * 
  * Returns the indegree of the vertex with the given identifier in the given
- * graph. The indegree of a vertex in a directed graph is the number of edges
- * pointing to it. Returns 0 if the given id does not represent a vertex
+ * graph. The indegree of a vertex in a directed graph is the number of 
+ * incoming edges. Returns 0 if the given id does not represent a vertex
  * in the given graph.
  * 
  * PRECONDITIONS:
@@ -232,8 +234,8 @@ unsigned graph_indegree(const graph_t *graph, unsigned id);
 /* graph_outdegree() 
  *
  * Returns the outdegree of the vertex with the given identifier in the given
- * graph. The outdegree of a vertex in a directed graph is the number of edges
- * pointing from it. Returns 0 if the given id does not represent a vertex
+ * graph. The outdegree of a vertex in a directed graph is the number of
+ * outgoing edges. Returns 0 if the given id does not represent a vertex
  * in the given graph.
  * 
  * PRECONDITIONS:
@@ -253,11 +255,13 @@ unsigned graph_outdegree(const graph_t *graph, unsigned id);
  *
  * REMARKS:
  *  - This function exists for testing purposes as it provides a convenient way
- *    to create graphs. It will crash on bad input.
+ *    to create graphs. It might crash on bad input.
  *  - This function only works if the implementation of the following functions
  *     is correct:
  *      - graph_initialise
  *      - graph_connect
+ *
+ * NOTE: See the file graph1.txt for an example
  */
 void graph_build_from_file(graph_t *graph, const char *pathname);
 
@@ -266,10 +270,15 @@ void graph_build_from_file(graph_t *graph, const char *pathname);
  * Builds a dot representation of the given graph and saves it
  * to the file with the given name. 
  *
- * See "https://graphviz.org" and "man dot" on how to create a
- * graphical representation with the dot command line tool
- * and "man xdot" on how to use the interactive viewer for Grahpviz dot
- * files.
+ * See "https://graphviz.org" and the manual page for dot for more information
+ * on the dot format.
+ *
+ * You can vizualize the graph by opening the generated dot file from a 
+ * Linux terminal with the 'xdot' tool or you can use an online tool such as
+ *    http://magjac.com/graphviz-visual-editor/
+ *  or
+ *    https://dreampuf.github.io/GraphvizOnline/
+ *  to do so.
  *
  * PRECONDITIONS:
  *   graph != NULL
